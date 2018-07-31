@@ -13,17 +13,17 @@ class ApplicationController < Sinatra::Base
   
   post '/results' do
     #puts params
-    points_array = params.values
+    points_array = params.values # makes an array that has all the point values from the questions answered
     total = 0
-    points_array.each do |point|
-      total += point.to_i
+    points_array.each do |point| # loop through points array to calculate total
+      total += point.to_i # makes sure to convert points to an integer because it's a string
     end
     #puts total
     
-    result = calculate_result(total)
+    result = calculate_result(total) # use the method calculate_result (that we defined in sample_model.rb) to get result
     
     #puts result
-    if result == "Besties!"
+    if result == "Besties!" # depending on the result, redirect to a certain erb file (aka different page)
       return erb :bestfriends
     elsif result == "Okay!"
       return erb :okayfriends
